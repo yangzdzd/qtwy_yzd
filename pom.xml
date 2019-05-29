@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.8.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.qtwy</groupId>
+    <artifactId>qtwy_yzd</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>qtwy_yzd</name>
+    <description>毕业设计-杨志东</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
+        <!--数据源-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.19</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+
+        <!--给内嵌的tomcat提供jsp解析功能 -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+        <!--页面取值 -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.56</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!--excal表格-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <!--goeasy-->
+        <dependency>
+            <groupId>io.goeasy</groupId>
+            <artifactId>goeasy-sdk</artifactId>
+            <version>0.3.8</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>goeasy</id>
+            <name>goeasy</name>
+            <url>
+                http://maven.goeasy.io/content/repositories/releases/
+            </url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

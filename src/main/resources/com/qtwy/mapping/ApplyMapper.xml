@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtwy.dao.ApplyMapper">
+  <resultMap id="BaseResultMap" type="com.qtwy.entity.Apply">
+
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="job_address" jdbcType="VARCHAR" property="jobAddress" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_salary" jdbcType="DOUBLE" property="jobSalary" />
+    <result column="release_time" jdbcType="DATE" property="releaseTime" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+
+    sid, realname, job_address, job_name, job_salary, release_time, company_name
+  </sql>
+  <select id="selectByExample" parameterType="com.qtwy.entity.ApplyExample" resultMap="BaseResultMap">
+
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    from apply
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    delete from apply
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qtwy.entity.ApplyExample">
+
+    delete from apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qtwy.entity.Apply">
+
+    insert into apply (sid, realname, job_address, 
+      job_name, job_salary, release_time, 
+      company_name)
+    values (#{sid,jdbcType=INTEGER}, #{realname,jdbcType=VARCHAR}, #{jobAddress,jdbcType=VARCHAR}, 
+      #{jobName,jdbcType=VARCHAR}, #{jobSalary,jdbcType=DOUBLE}, #{releaseTime,jdbcType=DATE}, 
+      #{companyName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qtwy.entity.Apply">
+
+    insert into apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="jobAddress != null">
+        job_address,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobSalary != null">
+        job_salary,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobAddress != null">
+        #{jobAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobSalary != null">
+        #{jobSalary,jdbcType=DOUBLE},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=DATE},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qtwy.entity.ApplyExample" resultType="java.lang.Integer">
+
+    select count(*) from apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+
+    update apply
+    <set>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.realname != null">
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobAddress != null">
+        job_address = #{record.jobAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobName != null">
+        job_name = #{record.jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobSalary != null">
+        job_salary = #{record.jobSalary,jdbcType=DOUBLE},
+      </if>
+      <if test="record.releaseTime != null">
+        release_time = #{record.releaseTime,jdbcType=DATE},
+      </if>
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+
+    update apply
+    set sid = #{record.sid,jdbcType=INTEGER},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      job_address = #{record.jobAddress,jdbcType=VARCHAR},
+      job_name = #{record.jobName,jdbcType=VARCHAR},
+      job_salary = #{record.jobSalary,jdbcType=DOUBLE},
+      release_time = #{record.releaseTime,jdbcType=DATE},
+      company_name = #{record.companyName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qtwy.entity.Apply">
+
+    update apply
+    <set>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobAddress != null">
+        job_address = #{jobAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobSalary != null">
+        job_salary = #{jobSalary,jdbcType=DOUBLE},
+      </if>
+      <if test="releaseTime != null">
+        release_time = #{releaseTime,jdbcType=DATE},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qtwy.entity.Apply">
+
+    update apply
+    set realname = #{realname,jdbcType=VARCHAR},
+      job_address = #{jobAddress,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      job_salary = #{jobSalary,jdbcType=DOUBLE},
+      release_time = #{releaseTime,jdbcType=DATE},
+      company_name = #{companyName,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+  	select * from apply
+  </select>
+</mapper>

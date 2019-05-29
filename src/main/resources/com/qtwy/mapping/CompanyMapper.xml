@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtwy.dao.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.qtwy.entity.Company">
+
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_type" jdbcType="VARCHAR" property="companyType" />
+    <result column="company_login_name" jdbcType="VARCHAR" property="companyLoginName" />
+    <result column="company_pwd" jdbcType="VARCHAR" property="companyPwd" />
+    <result column="company_address" jdbcType="VARCHAR" property="companyAddress" />
+    <result column="company_website" jdbcType="VARCHAR" property="companyWebsite" />
+    <result column="company_desc" jdbcType="VARCHAR" property="companyDesc" />
+    <result column="emp_num" jdbcType="VARCHAR" property="empNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+
+    cid, company_name, company_type, company_login_name, company_pwd, company_address, 
+    company_website, company_desc, emp_num
+  </sql>
+  <select id="selectByExample" parameterType="com.qtwy.entity.CompanyExample" resultMap="BaseResultMap">
+
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+    select 
+    <include refid="Base_Column_List" />
+    from company
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    delete from company
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qtwy.entity.CompanyExample">
+
+    delete from company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qtwy.entity.Company">
+
+    insert into company (cid, company_name, company_type, 
+      company_login_name, company_pwd, company_address, 
+      company_website, company_desc, emp_num
+      )
+    values (#{cid,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyType,jdbcType=VARCHAR}, 
+      #{companyLoginName,jdbcType=VARCHAR}, #{companyPwd,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, 
+      #{companyWebsite,jdbcType=VARCHAR}, #{companyDesc,jdbcType=VARCHAR}, #{empNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qtwy.entity.Company">
+
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyType != null">
+        company_type,
+      </if>
+      <if test="companyLoginName != null">
+        company_login_name,
+      </if>
+      <if test="companyPwd != null">
+        company_pwd,
+      </if>
+      <if test="companyAddress != null">
+        company_address,
+      </if>
+      <if test="companyWebsite != null">
+        company_website,
+      </if>
+      <if test="companyDesc != null">
+        company_desc,
+      </if>
+      <if test="empNum != null">
+        emp_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null">
+        #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLoginName != null">
+        #{companyLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPwd != null">
+        #{companyPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyWebsite != null">
+        #{companyWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="companyDesc != null">
+        #{companyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="empNum != null">
+        #{empNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qtwy.entity.CompanyExample" resultType="java.lang.Integer">
+
+    select count(*) from company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+
+    update company
+    <set>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyType != null">
+        company_type = #{record.companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyLoginName != null">
+        company_login_name = #{record.companyLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyPwd != null">
+        company_pwd = #{record.companyPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddress != null">
+        company_address = #{record.companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyWebsite != null">
+        company_website = #{record.companyWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyDesc != null">
+        company_desc = #{record.companyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empNum != null">
+        emp_num = #{record.empNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+
+    update company
+    set cid = #{record.cid,jdbcType=INTEGER},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      company_type = #{record.companyType,jdbcType=VARCHAR},
+      company_login_name = #{record.companyLoginName,jdbcType=VARCHAR},
+      company_pwd = #{record.companyPwd,jdbcType=VARCHAR},
+      company_address = #{record.companyAddress,jdbcType=VARCHAR},
+      company_website = #{record.companyWebsite,jdbcType=VARCHAR},
+      company_desc = #{record.companyDesc,jdbcType=VARCHAR},
+      emp_num = #{record.empNum,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qtwy.entity.Company">
+
+    update company
+    <set>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null">
+        company_type = #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLoginName != null">
+        company_login_name = #{companyLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPwd != null">
+        company_pwd = #{companyPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyWebsite != null">
+        company_website = #{companyWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="companyDesc != null">
+        company_desc = #{companyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="empNum != null">
+        emp_num = #{empNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qtwy.entity.Company">
+
+    update company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_type = #{companyType,jdbcType=VARCHAR},
+      company_login_name = #{companyLoginName,jdbcType=VARCHAR},
+      company_pwd = #{companyPwd,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      company_website = #{companyWebsite,jdbcType=VARCHAR},
+      company_desc = #{companyDesc,jdbcType=VARCHAR},
+      emp_num = #{empNum,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+  	select * from company
+  </select>
+</mapper>

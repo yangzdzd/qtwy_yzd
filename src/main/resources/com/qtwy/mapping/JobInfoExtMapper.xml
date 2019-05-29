@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qtwy.dao.JobInfoExtMapper">
+	<resultMap type="com.qtwy.pojoExt.JobInfoExt" id="JobInfoRstMap">
+		<id column="job_id" jdbcType="INTEGER" property="jobId" />
+		<result column="job_name" jdbcType="VARCHAR" property="jobName" />
+		<result column="job_address" jdbcType="VARCHAR" property="jobAddress" />
+		<result column="job_salary" jdbcType="DOUBLE" property="jobSalary" />
+		<result column="release_time" jdbcType="DATE" property="releaseTime" />
+		<result column="cid" jdbcType="VARCHAR" property="cid" />
+		<association property="company" javaType="com.qtwy.entity.Company">
+			<id column="cid" property="cid"/>
+			<result column="company_name" property="companyName"/>  
+		</association>
+	</resultMap>
+<!-- 查询所有职位 -->
+	<select id="findAll" parameterType="java.util.Map" resultMap="JobInfoRstMap">
+		 select
+		 com.cid,
+		 com.company_name,
+		 j.job_id,
+		 j.job_name,
+		 j.job_address,
+		 j.job_salary,
+		 j.release_time
+ 		 from job j 
+ 		 inner join company com 
+ 		 on j.cid=com.cid
+ 		 where 1=1 
+ 		 <if test="companyName != null and companyName != ''">
+			<bind name="companyName" value=" '%' + companyName + '%' "/>
+			and com.company_name like #{companyName}
+		 </if>
+		  <if test="jobAddress != null and jobAddress != ''">
+			<bind name="jobAddress" value=" '%' + jobAddress + '%' "/>
+			and  j.job_address like #{jobAddress}
+		 </if>
+ 		 <if test="jobName != null and jobName != ''">
+			<bind name="jobName" value=" '%' + jobName + '%' "/>
+			and  j.job_name like #{jobName}
+		 </if>
+	</select>
+</mapper>

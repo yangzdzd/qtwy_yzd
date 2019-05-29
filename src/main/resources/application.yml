@@ -1,0 +1,28 @@
+server:
+  port: 9999
+  context-path: /qtwy
+  jsp-servlet:
+    init-parameters:
+      development: true
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/qtwy_yzd
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 200MB
+mybatis:
+  mapper-locations: classpath:com/qtwy/mapping/*Mapper.xml
+  type-aliases-package: com.qtwy.entity
